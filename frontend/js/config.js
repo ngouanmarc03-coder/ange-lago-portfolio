@@ -16,6 +16,5 @@ const isLocalDev = ['localhost', '127.0.0.1'].includes(window.location.hostname)
 
 const API_URL = isLocalDev
   ? `${window.location.protocol}//${window.location.hostname}:5000/api`
-  : 'http://localhost:5000/api'; // ⚠️ remplace cette ligne par ton URL Railway au déploiement
-
+  : 'https://ange-lago-portfolio-production-df89.up.railway.app/api';
 window.API_URL = API_URL;
