@@ -152,44 +152,35 @@ async function loadProfile() {
     const p = await apiGet('/profile');
     profileCache = p;
 
-    const strip = document.getElementById('profileStrip');
-    strip.innerHTML = `
-      <div class="profile-stat"><div class="profile-stat-label">Poste</div><div class="profile-stat-value">${p.position || '—'}</div></div>
-      <div class="profile-stat"><div class="profile-stat-label">Âge</div><div class="profile-stat-value">${calculateAge(p.birthDate) || '—'} ans</div></div>
-      <div class="profile-stat"><div class="profile-stat-label">Nationalité</div><div class="profile-stat-value">${p.nationality || '—'}</div></div>
-      <div class="profile-stat"><div class="profile-stat-label">Club</div><div class="profile-stat-value">${p.club || '—'}</div></div>
-    `;
-
     // About
-    document.getElementById('aboutBio').textContent = p.bio || 'Biographie à venir.';
+    const aboutBio = document.getElementById('aboutBio');
+    if (aboutBio) aboutBio.textContent = p.bio || 'Biographie à venir.';
+
     if (p.profileImageUrl) {
       const img = document.getElementById('aboutPhoto');
-      img.src = p.profileImageUrl;
-      img.style.display = 'block';
-      document.getElementById('aboutPhotoPlaceholder').style.display = 'none';
-
-      const statsImg = document.getElementById('statsPhoto');
-      statsImg.src = p.profileImageUrl;
-      statsImg.style.display = 'block';
-      document.getElementById('statsPhotoPlaceholder').style.display = 'none';
+      if (img) {
+        img.src = p.profileImageUrl;
+        img.style.display = 'block';
+        document.getElementById('aboutPhotoPlaceholder')?.style.setProperty('display', 'none');
+      }
     }
-    document.getElementById('statsHeroTitle').textContent = `${p.fullName || 'Ange Lago'} — ${p.position || ''}`;
-    document.getElementById('statsHeroSubtitle').textContent = 'Découvrez les performances, le rythme de jeu et les derniers matchs de la saison.';
 
     // Footer réseaux sociaux
     const footerSocials = document.getElementById('footerSocials');
-    const socialsHtml = [];
-    if (p.instagramUrl) {
-      socialsHtml.push(`<a class="footer-social-link ${p.hasActiveStory ? 'has-story' : ''}" href="${p.instagramUrl}" target="_blank" rel="noopener" aria-label="Instagram" data-icon="instagram"></a>`);
+    if (footerSocials) {
+      const socialsHtml = [];
+      if (p.instagramUrl) {
+        socialsHtml.push(`<a class="footer-social-link ${p.hasActiveStory ? 'has-story' : ''}" href="${p.instagramUrl}" target="_blank" rel="noopener" aria-label="Instagram" data-icon="instagram"></a>`);
+      }
+      if (p.youtubeUrl) {
+        socialsHtml.push(`<a class="footer-social-link" href="${p.youtubeUrl}" target="_blank" rel="noopener" aria-label="YouTube" data-icon="youtube"></a>`);
+      }
+      if (p.facebookUrl) {
+        socialsHtml.push(`<a class="footer-social-link" href="${p.facebookUrl}" target="_blank" rel="noopener" aria-label="Facebook" data-icon="facebook"></a>`);
+      }
+      footerSocials.innerHTML = socialsHtml.join('');
+      renderIcons(footerSocials);
     }
-    if (p.youtubeUrl) {
-      socialsHtml.push(`<a class="footer-social-link" href="${p.youtubeUrl}" target="_blank" rel="noopener" aria-label="YouTube" data-icon="youtube"></a>`);
-    }
-    if (p.facebookUrl) {
-      socialsHtml.push(`<a class="footer-social-link" href="${p.facebookUrl}" target="_blank" rel="noopener" aria-label="Facebook" data-icon="facebook"></a>`);
-    }
-    footerSocials.innerHTML = socialsHtml.join('');
-    renderIcons(footerSocials);
 
     const footerContact = document.getElementById('footerContact');
     if (footerContact) {
@@ -223,14 +214,16 @@ async function loadProfile() {
 
     // Agent
     const agentLinks = document.getElementById('agentLinks');
-    const rows = [];
-    if (p.agentName) rows.push(`<div class="agent-link-row"><span class="icon-wrap" data-icon="user"></span><div><div class="agent-link-name">Agent</div><div class="agent-link-value">${p.agentName}</div></div></div>`);
-    if (p.agentEmail) rows.push(`<a class="agent-link-row" href="mailto:${p.agentEmail}"><span class="icon-wrap" data-icon="mail"></span><div><div class="agent-link-name">Email</div><div class="agent-link-value">${p.agentEmail}</div></div></a>`);
-    if (p.agentPhone) rows.push(`<a class="agent-link-row" href="tel:${p.agentPhone}"><span class="icon-wrap" data-icon="phone"></span><div><div class="agent-link-name">Téléphone</div><div class="agent-link-value">${p.agentPhone}</div></div></a>`);
-    if (p.agentInstagramUrl) rows.push(`<a class="agent-link-row" href="${p.agentInstagramUrl}" target="_blank" rel="noopener"><span class="icon-wrap" data-icon="instagram"></span><div><div class="agent-link-name">Instagram</div><div class="agent-link-value">Voir le profil</div></div></a>`);
-    if (p.agentFacebookUrl) rows.push(`<a class="agent-link-row" href="${p.agentFacebookUrl}" target="_blank" rel="noopener"><span class="icon-wrap" data-icon="facebook"></span><div><div class="agent-link-name">Facebook</div><div class="agent-link-value">Voir le profil</div></div></a>`);
-    agentLinks.innerHTML = rows.length ? rows.join('') : '<div class="empty-state">Coordonnées à venir.</div>';
-    renderIcons(agentLinks);
+    if (agentLinks) {
+      const rows = [];
+      if (p.agentName) rows.push(`<div class="agent-link-row"><span class="icon-wrap" data-icon="user"></span><div><div class="agent-link-name">Agent</div><div class="agent-link-value">${p.agentName}</div></div></div>`);
+      if (p.agentEmail) rows.push(`<a class="agent-link-row" href="mailto:${p.agentEmail}"><span class="icon-wrap" data-icon="mail"></span><div><div class="agent-link-name">Email</div><div class="agent-link-value">${p.agentEmail}</div></div></a>`);
+      if (p.agentPhone) rows.push(`<a class="agent-link-row" href="tel:${p.agentPhone}"><span class="icon-wrap" data-icon="phone"></span><div><div class="agent-link-name">Téléphone</div><div class="agent-link-value">${p.agentPhone}</div></div></a>`);
+      if (p.agentInstagramUrl) rows.push(`<a class="agent-link-row" href="${p.agentInstagramUrl}" target="_blank" rel="noopener"><span class="icon-wrap" data-icon="instagram"></span><div><div class="agent-link-name">Instagram</div><div class="agent-link-value">Voir le profil</div></div></a>`);
+      if (p.agentFacebookUrl) rows.push(`<a class="agent-link-row" href="${p.agentFacebookUrl}" target="_blank" rel="noopener"><span class="icon-wrap" data-icon="facebook"></span><div><div class="agent-link-name">Facebook</div><div class="agent-link-value">Voir le profil</div></div></a>`);
+      agentLinks.innerHTML = rows.length ? rows.join('') : '<div class="empty-state">Coordonnées à venir.</div>';
+      renderIcons(agentLinks);
+    }
 
     // Affiliations (club + éventuels autres badges)
     await loadFooterAffiliations(p);
