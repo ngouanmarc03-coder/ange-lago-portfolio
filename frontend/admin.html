@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Admin — Ange Lago</title>
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">ANGE<span>LAGO</span></div>
+    <h1>Administration</h1>
+    <p>Connecte-toi pour gérer le contenu du site.</p>
+    <div class="form-row">
+      <label>Mot de passe</label>
+      <input type="password" id="loginPassword" placeholder="••••••••">
+    </div>
+    <button class="btn btn-primary" id="loginBtn" style="margin-top:10px;">Se connecter</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
+<div class="admin-app" id="adminApp">
+  <div class="admin-topbar">
+    <div class="admin-topbar-logo">ANGE<span>LAGO</span> · ADMIN</div>
+    <button class="logout-btn" id="logoutBtn"><span data-icon="logout" data-icon-size="16"></span> Sortir</button>
+  </div>
+
+  <div class="admin-content">
+
+    <!-- ACCUEIL / HERO INTRO -->
+    <section class="admin-panel active" id="panel-hero">
+      <div class="panel-header"><span class="icon-badge" data-icon="video"></span><h2>Accueil (visuels)</h2></div>
+      <p class="helper-text" style="margin-bottom:14px;">Les images/vidéos ajoutées ici s'affichent en grand sur la page d'accueil, en boucle.</p>
+      <div id="heroList"></div>
+    </section>
+
+    <!-- PROCHAIN MATCH -->
+    <section class="admin-panel" id="panel-matches">
+      <div class="panel-header"><span class="icon-badge" data-icon="calendar"></span><h2>Prochain match</h2></div>
+      <div id="matchesList"></div>
+    </section>
+
+    <!-- ACTUALITÉS -->
+    <section class="admin-panel" id="panel-news">
+      <div class="panel-header"><span class="icon-badge" data-icon="newspaper"></span><h2>Actualités</h2></div>
+      <div id="newsList"></div>
+    </section>
+
+    <!-- STATS -->
+    <section class="admin-panel" id="panel-stats">
+      <div class="panel-header"><span class="icon-badge" data-icon="chart"></span><h2>Statistiques</h2></div>
+      <div class="form-card">
+        <h3>Cumul saison</h3>
+        <div class="form-row"><label>Saison</label><input type="text" id="s-season" placeholder="2025-2026"></div>
+        <div class="form-row-inline">
+          <div class="form-row"><label>Matchs joués</label><input type="number" id="s-matchesPlayed"></div>
+          <div class="form-row"><label>Minutes</label><input type="number" id="s-minutesPlayed"></div>
+        </div>
+        <div class="form-row-inline">
+          <div class="form-row"><label>Buts</label><input type="number" id="s-goals"></div>
+          <div class="form-row"><label>Passes déc.</label><input type="number" id="s-assists"></div>
+        </div>
+        <div class="form-row-inline">
+          <div class="form-row"><label>Cartons jaunes</label><input type="number" id="s-yellowCards"></div>
+          <div class="form-row"><label>Cartons rouges</label><input type="number" id="s-redCards"></div>
+        </div>
+        <div class="form-row"><label>Endurance (km parcourus, saison)</label><input type="number" id="s-distanceKm" step="0.1"></div>
+        <div class="form-row">
+          <label>Image de fond de la section stats</label>
+          <div class="file-input-wrap"><span id="statsBackgroundLabel">Choisir une image</span><input type="file" id="statsBackgroundImage" accept="image/*"></div>
+        </div>
+        <button class="btn btn-primary" id="saveSeasonBtn" style="margin-top:8px;">Enregistrer</button>
+      </div>
+
+      <div class="panel-header"><span class="icon-badge" data-icon="goal"></span><h2>Stats par match</h2></div>
+      <div id="matchStatsList"></div>
+    </section>
+
+    <!-- PARCOURS -->
+    <section class="admin-panel" id="panel-career">
+      <div class="panel-header"><span class="icon-badge" data-icon="bolt"></span><h2>Parcours</h2></div>
+      <div id="careerList"></div>
+    </section>
+
+    <!-- PALMARÈS -->
+    <section class="admin-panel" id="panel-trophies">
+      <div class="panel-header"><span class="icon-badge" data-icon="star"></span><h2>Palmarès</h2></div>
+      <div id="trophiesList"></div>
+    </section>
+
+    <!-- PARTENAIRES -->
+    <section class="admin-panel" id="panel-partners">
+      <div class="panel-header"><span class="icon-badge" data-icon="handshake"></span><h2>Partenaires</h2></div>
+      <div id="partnersList"></div>
+    </section>
+
+    <!-- GALERIE -->
+    <section class="admin-panel" id="panel-gallery">
+      <div class="panel-header"><span class="icon-badge" data-icon="image"></span><h2>Médias</h2></div>
+      <p class="helper-text" style="margin-bottom:14px;">Les contenus ajoutés ici apparaissent dans la galerie et dans le hero “Regarder les vidéos de Ange Lago” de la page d’accueil.</p>
+      <div id="galleryList"></div>
+    </section>
+
+    <!-- PROFIL & CONTACT -->
+    <section class="admin-panel" id="panel-profile">
+      <div class="panel-header"><span class="icon-badge" data-icon="user"></span><h2>Profil & contact</h2></div>
+
+      <div class="form-card">
+        <h3>Informations du joueur</h3>
+        <div class="form-row">
+          <label>Photo de profil</label>
+          <div class="file-input-wrap"><span id="profilePhotoLabel">Choisir une photo</span><input type="file" id="profilePhoto" accept="image/*"></div>
+        </div>
+        <div class="form-row"><label>Nom complet</label><input type="text" id="p-fullName"></div>
+        <div class="form-row-inline">
+          <div class="form-row"><label>Poste</label><input type="text" id="p-position"></div>
+          <div class="form-row"><label>Pied fort</label><input type="text" id="p-foot"></div>
+        </div>
+        <div class="form-row-inline">
+          <div class="form-row"><label>Date de naissance</label><input type="date" id="p-birthDate"></div>
+          <div class="form-row"><label>Taille</label><input type="text" id="p-height" placeholder="1m85"></div>
+        </div>
+        <div class="form-row"><label>Lieu de naissance</label><input type="text" id="p-birthPlace"></div>
+        <div class="form-row"><label>Nationalité</label><input type="text" id="p-nationality"></div>
+        <div class="form-row"><label>Biographie (page "Qui est Ange Lago")</label><textarea id="p-bio"></textarea></div>
+      </div>
+
+      <div class="form-card">
+        <h3>Club actuel</h3>
+        <div class="form-row"><label>Nom du club</label><input type="text" id="p-club"></div>
+        <div class="form-row"><label>Lien vers le site du club</label><input type="url" id="p-clubUrl" placeholder="https://www.om.fr"></div>
+        <div class="form-row">
+          <label>Logo du club</label>
+          <div class="file-input-wrap"><span id="clubLogoLabel">Choisir un logo</span><input type="file" id="clubLogo" accept="image/*"></div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h3>Réseaux sociaux</h3>
+        <div class="form-row"><label>Instagram</label><input type="url" id="p-instagramUrl"></div>
+        <div class="checkbox-row" style="margin:-6px 0 14px;">
+          <input type="checkbox" id="p-hasActiveStory">
+          <label for="p-hasActiveStory">Story Instagram active en ce moment (affiche l'anneau coloré sur le site)</label>
+        </div>
+        <div class="form-row"><label>Facebook</label><input type="url" id="p-facebookUrl"></div>
+        <div class="form-row"><label>YouTube</label><input type="url" id="p-youtubeUrl"></div>
+      </div>
+
+      <div class="form-card">
+        <h3>Hero contact</h3>
+        <div class="form-row">
+          <label>Image de fond du hero contact</label>
+          <div class="file-input-wrap"><span id="contactHeroImageLabel">Choisir une image</span><input type="file" id="contactHeroImage" accept="image/*"></div>
+        </div>
+        <div class="form-row"><label>Titre du hero</label><input type="text" id="p-contactHeroTitle"></div>
+        <div class="form-row"><label>Sous-titre du hero</label><textarea id="p-contactHeroSubtitle"></textarea></div>
+        <div class="form-row"><label>Texte du bouton</label><input type="text" id="p-contactHeroButtonLabel" placeholder="Contacter"></div>
+      </div>
+
+      <div class="form-card">
+        <h3>Contact de l'agent</h3>
+        <p class="helper-text" style="margin-bottom:12px;">Affiché dans la section Contact du site, séparément du formulaire.</p>
+        <div class="form-row"><label>Nom de l'agent</label><input type="text" id="p-agentName"></div>
+        <div class="form-row"><label>Email</label><input type="email" id="p-agentEmail"></div>
+        <div class="form-row"><label>Téléphone</label><input type="tel" id="p-agentPhone"></div>
+        <div class="form-row"><label>Instagram de l'agent</label><input type="url" id="p-agentInstagramUrl"></div>
+        <div class="form-row"><label>Facebook de l'agent</label><input type="url" id="p-agentFacebookUrl"></div>
+      </div>
+
+      <button class="btn btn-primary" id="saveProfileBtn">Enregistrer tout le profil</button>
+
+      <div class="section-divider"></div>
+
+      <div class="panel-header"><span class="icon-badge" data-icon="externalLink"></span><h2>Autres badges (sélection, académie...)</h2></div>
+      <p class="helper-text" style="margin-bottom:14px;">Petits badges avec logo affichés en pied de page, en plus du club.</p>
+      <div id="affiliationsList"></div>
+    </section>
+
+    <!-- MESSAGES -->
+    <section class="admin-panel" id="panel-messages">
+      <div class="panel-header"><span class="icon-badge" data-icon="mail"></span><h2>Messages reçus</h2></div>
+      <div id="messagesList"></div>
+    </section>
+
+  </div>
+
+  <button class="fab" id="fabAdd" hidden data-icon="plus" data-icon-size="24"></button>
+
+  <nav class="bottom-nav" id="bottomNav">
+    <button class="nav-btn active" data-panel="hero"><span data-icon="video"></span>Accueil</button>
+    <button class="nav-btn" data-panel="matches"><span data-icon="calendar"></span>Match</button>
+    <button class="nav-btn" data-panel="news"><span data-icon="newspaper"></span>Actus</button>
+    <button class="nav-btn" data-panel="stats"><span data-icon="chart"></span>Stats</button>
+    <button class="nav-btn" data-panel="career"><span data-icon="bolt"></span>Parcours</button>
+    <button class="nav-btn" data-panel="trophies"><span data-icon="star"></span>Palmarès</button>
+    <button class="nav-btn" data-panel="partners"><span data-icon="handshake"></span>Partenaires</button>
+    <button class="nav-btn" data-panel="gallery"><span data-icon="image"></span>Médias</button>
+    <button class="nav-btn" data-panel="profile"><span data-icon="user"></span>Profil</button>
+    <button class="nav-btn" data-panel="messages"><span data-icon="mail"></span>Messages</button>
+  </nav>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-sheet">
+    <div class="modal-sheet-header">
+      <h3 id="modalTitle">Ajouter</h3>
+      <button class="modal-close" id="modalClose" data-icon="x" data-icon-size="22"></button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/config.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/api.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

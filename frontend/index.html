@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ange Lago — Attaquant, Olympique de Marseille</title>
+<meta name="description" content="Site officiel d'Ange Lago, attaquant ivoirien à l'Olympique de Marseille.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="#hero-intro" class="logo">ANGE<span>LAGO</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#next-match">Prochain match</a>
+      <a href="#actualites">Actualités</a>
+      <a href="#stats">Stats</a>
+      <a href="#palmares">Palmarès</a>
+      <a href="#partenaires">Partenaires</a>
+      <a href="#medias">Médias</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO 1 — INTRO -->
+<section class="hero hero-intro" id="hero-intro">
+  <div class="hero-slides" id="heroSlides">
+    <div class="empty-state" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;">Chargement…</div>
+  </div>
+  <div class="hero-controls" id="heroControls"></div>
+  <button class="hero-mute-btn" id="heroMuteBtn" aria-label="Activer/couper le son" hidden></button>
+  <a href="#about" class="hero-cta-btn">
+    Qui est Ange Lago
+    <span class="hero-cta-icon" data-icon="chevronRight"></span>
+  </a>
+</section>
+
+
+
+<!-- ABOUT / BIO -->
+<section id="about">
+  <div class="container about-layout">
+    <div class="about-photo-wrap">
+      <img id="aboutPhoto" class="about-photo" src="" alt="Ange Lago" style="display:none;">
+      <div class="about-photo-placeholder" id="aboutPhotoPlaceholder"></div>
+    </div>
+    <div class="about-text">
+      <div class="section-title"><span class="index"></span><h2>Qui est Ange Lago</h2></div>
+      <p class="about-bio" id="aboutBio">Emmanuel Israel Ange Lago (né le 27 décembre 2004) est un footballeur professionnel ivoirien qui joue comme attaquant pour le club de Ligue 1 Marseille .</p>
+    </div>
+  </div>
+</section>
+
+<!-- HERO 2 — PROCHAIN MATCH -->
+<section class="hero hero-match" id="next-match">
+  <div id="nextMatchContent" class="hero-match-inner">
+    <div class="empty-state" style="color:#fff;">Aucun match programmé pour le moment.</div>
+  </div>
+</section>
+
+<!-- HERO 3 — ACTUALITÉS -->
+<section id="actualites">
+  <div class="container">
+    <div class="section-title"><span class="index"></span><h2>Actualités</h2></div>
+    <div class="news-hero-layout" id="newsHeroLayout">
+      <div class="skeleton" style="height:420px;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="container">
+    <div class="stats-hero" id="statsHero">
+      <div class="stats-hero-content">
+        <div class="stats-hero-eyebrow">Statistiques</div>
+        <h3 class="stats-hero-title" id="statsHeroTitle">Saison en cours</h3>
+        <p class="stats-hero-subtitle" id="statsHeroSubtitle">Découvrez les performances, le rythme de jeu et les derniers matchs de la saison.</p>
+        <button type="button" class="btn btn-primary stats-open-btn" id="openStatsModalBtn">Voir les stats</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-modal-overlay" id="statsModalOverlay">
+  <div class="stats-modal-card">
+    <button type="button" class="stats-modal-close" id="statsModalClose" aria-label="Fermer">×</button>
+    <div class="stats-modal-header">
+      <div>
+        <div class="stats-hero-eyebrow">Statistiques détaillées</div>
+        <h3 id="statsModalTitle">Saison en cours</h3>
+      </div>
+      <div class="stats-season-label" id="statsSeasonLabel">SAISON —</div>
+    </div>
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-box"><div class="stat-box-value">—</div><div class="stat-box-label">Matchs</div></div>
+      <div class="stat-box"><div class="stat-box-value">—</div><div class="stat-box-label">Buts</div></div>
+      <div class="stat-box"><div class="stat-box-value">—</div><div class="stat-box-label">Passes déc.</div></div>
+      <div class="stat-box"><div class="stat-box-value">—</div><div class="stat-box-label">Endurance</div></div>
+    </div>
+    <div class="match-list" id="matchList"></div>
+  </div>
+</div>
+
+<!-- PARCOURS -->
+<section id="parcours">
+  <div class="container">
+    <div class="section-title"><span class="index"></span><h2>Parcours</h2></div>
+    <div class="timeline" id="timelineList"></div>
+  </div>
+</section>
+
+<!-- PALMARÈS -->
+<section id="palmares">
+  <div class="container">
+    <div class="section-title"><span class="index"></span><h2>Palmarès</h2></div>
+    <div class="trophy-grid" id="trophyGrid"></div>
+  </div>
+</section>
+
+<!-- HERO 5 — PARTENAIRES -->
+<section class="hero-partners" id="partenaires">
+  <div class="container">
+    <div class="section-title"><span class="index"></span><h2>Partenaires</h2></div>
+    <div class="partners-strip" id="partnersStrip"></div>
+    <div class="partners-cta">
+      <p>Vous représentez une marque et souhaitez collaborer avec Ange Lago ?</p>
+      <a href="#contact" class="btn btn-primary">Devenir partenaire</a>
+    </div>
+  </div>
+</section>
+
+<!-- HERO 6 — MÉDIAS -->
+<section id="medias">
+  <div class="container">
+    <div class="section-title"><span class="index"></span><h2>Médias</h2></div>
+    <div class="gallery-filters" id="galleryFilters">
+      <button class="gallery-filter-btn active" data-filter="all">Tout</button>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-title"><span class="index"></span><h2>Contact</h2></div>
+    <div class="contact-hero" id="contactHero">
+      <div class="contact-hero-content">
+        <div class="contact-hero-eyebrow">Contact</div>
+        <h3 id="contactHeroTitle">Contacter Ange Lago</h3>
+        <p id="contactHeroSubtitle">Pour une demande professionnelle, un sponsoring ou toute autre question.</p>
+        <button type="button" class="btn btn-primary contact-open-btn" id="openContactModalBtn">Contacter</button>
+      </div>
+    </div>
+
+    <div class="agent-card" id="agentCard">
+      <h3>Contacter l'agent</h3>
+      <p class="agent-card-sub">Pour toute demande professionnelle, sponsoring ou négociation.</p>
+      <div class="agent-links" id="agentLinks">
+        <div class="empty-state">Coordonnées à venir.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="contact-modal-overlay" id="contactModalOverlay">
+  <div class="contact-modal-card">
+    <button type="button" class="contact-modal-close" id="contactModalClose" aria-label="Fermer">×</button>
+    <div class="contact-modal-grid">
+      <div class="contact-modal-copy">
+        <div class="contact-hero-eyebrow">Message direct</div>
+        <h3>Écrivez à Ange Lago</h3>
+        <p>Une demande de sponsoring, d’interview ou toute autre collaboration ? Envoyez votre message ici.</p>
+      </div>
+      <form id="contactForm" class="contact-form contact-form-modal">
+        <div class="form-group">
+          <label for="cf-name">Nom</label>
+          <input type="text" id="cf-name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="cf-subject">Sujet</label>
+          <input type="text" id="cf-subject" name="subject">
+        </div>
+        <div class="form-group">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          <span data-icon="send"></span> Envoyer
+        </button>
+        <div class="form-status" id="formStatus"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-socials" id="footerSocials"></div>
+    <div class="footer-info-grid">
+      <div class="footer-info-card">
+        <h4>Contact</h4>
+        <div id="footerContact"></div>
+      </div>
+      <div class="footer-info-card">
+        <h4>Navigation rapide</h4>
+        <div class="footer-links-list">
+          <a href="#hero-intro">Accueil</a>
+          <a href="#about">Profil</a>
+          <a href="#parcours">Parcours</a>
+          <a href="#contactHero">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-affiliations" id="footerAffiliations"></div>
+    <p class="footer-copy">© <span id="footerYear"></span> Ange Lago. Tous droits réservés. — <a href="admin.html">Admin</a></p>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Fermer">&times;</button>
+  <div class="lightbox-content" id="lightboxContent"></div>
+</div>
+
+<div class="modal-overlay" id="detailModal">
+  <div class="modal-sheet">
+    <div class="modal-sheet-header">
+      <h3 id="detailModalTitle">Détail</h3>
+      <button class="modal-close" id="detailModalClose">&times;</button>
+    </div>
+    <div id="detailModalBody"></div>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
